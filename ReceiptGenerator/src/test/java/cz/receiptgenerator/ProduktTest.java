@@ -2,15 +2,27 @@ package cz.receiptgenerator;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.math.BigDecimal;
 
-/** Člověk 1: doplňte test výpočtu ceny a neplatných vstupů. */
 class ProduktTest {
+
     @Test
-    void produktUchovavaZadaneUdaje() {
-        Produkt p = new Produkt("Rohlík", new BigDecimal("3.50"), 5);
-        assertEquals("Rohlík", p.getNazev());
-        assertEquals(5, p.getPocet());
+    void testVypocetCelkoveCenyPolozky() {
+        Produkt p = new Produkt("Chléb", 35.50, 2);
+        assertEquals(71.00, p.getCelkovaCenaPolozky(), 0.001);
     }
-    // TODO: test vypocitejCenu a Nakup.vypocitejCelkem.
+
+    @Test
+    void testZapornaCenaVyhodiVyjimku() {
+        assertThrows(IllegalArgumentException.class, () -> new Produkt("Mléko", -10.0, 1));
+    }
+
+    @Test
+    void testNulovyPocetKusuVyhodiVyjimku() {
+        assertThrows(IllegalArgumentException.class, () -> new Produkt("Mléko", 25.0, 0));
+    }
+
+    @Test
+    void testPrazdnyNazevVyhodiVyjimku() {
+        assertThrows(IllegalArgumentException.class, () -> new Produkt("  ", 25.0, 1));
+    }
 }
