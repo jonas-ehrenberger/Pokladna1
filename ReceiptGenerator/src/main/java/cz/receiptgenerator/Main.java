@@ -1,15 +1,35 @@
+
 package cz.receiptgenerator;
 
-/**
- * Člověk 4: vstupní bod aplikace a propojení všech hotových částí.
- */
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("ReceiptGenerator 0.1.0-SNAPSHOT");
-        System.out.println("Kostra projektu funguje. Implementaci rozdělte podle README.md.");
+import java.util.Scanner;
 
-        // TODO (člověk 4): načtěte obchod přes NacitaniKonfigurace.
-        // TODO (člověk 4): přes Konzole vytvořte Nakup.
-        // TODO (člověk 4): vytiskněte výsledek přes TiskUctenky.
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Načtení informací o obchodě
+        Obchod obchod = NacitaniKonfigurace.nactiZSouboru(
+                "obchod.properties"
+        );
+
+        // Vytvoření konzole a načtení nákupu
+        Konzole konzole = new Konzole();
+
+        Nakup nakup;
+
+        try (Scanner scanner = new Scanner(System.in)) {
+            nakup = konzole.nactiNakup(scanner);
+        }
+
+        // Vytvoření účtenky
+        TiskUctenky tiskUctenky = new TiskUctenky();
+
+        String uctenka = tiskUctenky.vytvorUctenku(
+                obchod, nakup
+        );
+
+        // Výpis účtenky
+        System.out.println();
+        System.out.println(uctenka);
     }
 }
