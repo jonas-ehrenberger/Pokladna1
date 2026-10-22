@@ -1,35 +1,43 @@
 # ReceiptGenerator
 
-Jednoduchá konzolová aplikace v Javě pro vytváření nákupních účtenek.
+A simple Java console application for generating shopping receipts.
 
-## Autoři
+## Authors
 
-- **Člověk 1:** Jonáš Ehrenberger
-- **Člověk 2:** František Včelička
-- **Člověk 3:** Ondřej Korecký 
-- **Člověk 4:** Kevin Nguyen
+- **Person 1:** Jonáš Ehrenberger
+- **Person 2:** František Včelička
+- **Person 3:** Ondřej Korecký
+- **Person 4:** Kevin Nguyen
 
-## Požadavky
+## Requirements
 
-- Java 17 nebo novější
-- Maven (pro sestavení projektu)
+- Java 17 or newer
+- Maven (for building the project)
 
-## Sestavení a spuštění
+## Build and Run
 
-V terminálu otevřete složku projektu obsahující soubor `pom.xml`.
+Open a terminal in the project directory containing the `pom.xml` file.
 
-**1. Sestavení aplikace:**
-
-```bash
-mvn clean package
-```
-
-**2. Spuštění aplikace:**
+**1. Build the application:**
 
 ```bash
-java -jar target/receipt-generator-0.1.0-SNAPSHOT.jar
+mvn -f ReceiptGenerator/pom.xml clean package
 ```
 
-Program umožňuje zadávat produkty a po ukončení nákupu vytiskne účtenku.
+**2. Run the application:**
 
-Aplikaci lze spustit přímo z terminálu bez IntelliJ IDEA. Pro spuštění již sestaveného JAR souboru stačí nainstalovaná Java, Maven není potřeba.
+```bash
+java -jar ReceiptGenerator/target/receipt-generator-0.1.0-SNAPSHOT.jar
+```
+
+## How to Use
+
+1. Enter the product name.
+2. Enter the price per unit.
+3. Enter the quantity.
+4. Repeat to add more products.
+5. Type `konec` as the product name to finish and generate the receipt.
+
+The application can run directly from the terminal without IntelliJ IDEA.
+
+Once the JAR file has been built, only Java is required to run it. Maven is not needed.

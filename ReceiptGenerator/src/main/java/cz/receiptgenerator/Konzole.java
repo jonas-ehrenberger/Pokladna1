@@ -1,3 +1,4 @@
+
 package cz.receiptgenerator;
 
 import java.util.Scanner;
@@ -10,10 +11,9 @@ public class Konzole {
 
         System.out.println("Vítejte v ReceiptGenerator v1.0.0!");
         System.out.println("----------------------------");
+        System.out.println("Pro ukončení zadávání napište 'konec'.");
 
-        boolean pokracovat = true;
-
-        while (pokracovat) {
+        while (true) {
 
             // Název produktu
             String nazev;
@@ -21,6 +21,10 @@ public class Konzole {
             while (true) {
                 System.out.print("Zadejte název produktu: ");
                 nazev = scanner.nextLine().trim();
+
+                if (nazev.equalsIgnoreCase("konec")) {
+                    return nakup;
+                }
 
                 if (!nazev.isEmpty()) {
                     break;
@@ -78,28 +82,7 @@ public class Konzole {
             nakup.pridatProdukt(produkt);
 
             System.out.println("Produkt přidán: " + nazev);
-
-            // Pokračování nákupu
-            while (true) {
-                System.out.print(
-                        "Chcete přidat další produkt? (ano/ne): "
-                );
-
-                String odpoved = scanner.nextLine().trim();
-
-                if (odpoved.equalsIgnoreCase("ano")) {
-                    break;
-                }
-
-                if (odpoved.equalsIgnoreCase("ne")) {
-                    pokracovat = false;
-                    break;
-                }
-
-                System.out.println("Zadejte pouze ano nebo ne.");
-            }
+            System.out.println();
         }
-
-        return nakup;
     }
 }

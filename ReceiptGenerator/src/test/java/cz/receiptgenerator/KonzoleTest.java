@@ -16,11 +16,10 @@ class KonzoleTest {
                 "Rohlík",
                 "5.50",
                 "3",
-                "ano",
                 "Mléko",
                 "29.90",
                 "2",
-                "ne"
+                "konec"
         );
 
         try (Scanner scanner = new Scanner(vstup)) {
@@ -47,7 +46,7 @@ class KonzoleTest {
                 "0",
                 "xyz",
                 "2",
-                "ne"
+                "konec"
         );
 
         try (Scanner scanner = new Scanner(vstup)) {
@@ -59,6 +58,21 @@ class KonzoleTest {
             assertEquals("Rohlík", nakup.getProdukty().get(0).getNazev());
             assertEquals(2, nakup.getProdukty().get(0).getPocetKusu());
             assertEquals(20.00, nakup.getCelkovaCena(), 0.001);
+        }
+    }
+
+    @Test
+    void konecBezProduktu() {
+
+        String vstup = "konec";
+
+        try (Scanner scanner = new Scanner(vstup)) {
+
+            Konzole konzole = new Konzole();
+            Nakup nakup = konzole.nactiNakup(scanner);
+
+            assertTrue(nakup.jePrazdny());
+            assertEquals(0, nakup.getCelkovaCena(), 0.001);
         }
     }
 }
