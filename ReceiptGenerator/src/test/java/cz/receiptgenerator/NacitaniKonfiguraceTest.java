@@ -3,12 +3,14 @@ package cz.receiptgenerator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Člověk 2: doplňte test načtení konfigurace. */
-class NacitaniKonfiguraceTest {
+public class NacitaniKonfiguraceTest {
+
     @Test
-    void obchodUchovavaUdaje() {
-        Obchod obchod = new Obchod("Obchod", "Praha", "12345678", "Díky!");
-        assertEquals("Obchod", obchod.getNazev());
+    public void testNacitaniKonfigurace() {
+        Obchod obchod = NacitaniKonfigurace.nactiZSouboru("obchod.properties");
+        assertNotNull(obchod);
+        assertNotNull(obchod.getNazev());
+        assertNotNull(obchod.getAdresa());
+        assertNotNull(obchod.getIco());
     }
-    // TODO: otestujte NacitaniKonfigurace.nactiObchod.
 }
