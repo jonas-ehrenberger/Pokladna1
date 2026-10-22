@@ -1,7 +1,9 @@
+
 package cz.receiptgenerator;
 
-/** Člověk 3: převod údajů o obchodě a nákupu na čitelnou účtenku. */
+import java.util.Locale;
 
+/** Člověk 3: převod údajů o obchodě a nákupu na čitelnou účtenku. */
 public class TiskUctenky {
 
     public String vytvorUctenku(Obchod obchod, Nakup nakup) {
@@ -17,9 +19,16 @@ public class TiskUctenky {
         for (Produkt produkt : nakup.getProdukty()) {
 
             String nazev = produkt.getNazev();
-            int pocet = produkt.getPocet();
-            String cena = produkt.getCena().toPlainString();
-            String celkovaCena = produkt.vypocitejCenu().toPlainString();
+            int pocet = produkt.getPocetKusu();
+
+            String cena = String.format(
+                    Locale.US, "%.2f", produkt.getCena()
+            );
+
+            String celkovaCena = String.format(
+                    Locale.US, "%.2f",
+                    produkt.getCelkovaCenaPolozky()
+            );
 
             uctenka.append(nazev)
                     .append(" | ")
@@ -34,7 +43,10 @@ public class TiskUctenky {
         uctenka.append("----------------------------\n");
 
         uctenka.append("CELKEM: ")
-                .append(nakup.vypocitejCelkem().toPlainString())
+                .append(String.format(
+                        Locale.US, "%.2f",
+                        nakup.getCelkovaCena()
+                ))
                 .append(" Kč\n");
 
         uctenka.append("============================\n");
@@ -43,8 +55,6 @@ public class TiskUctenky {
 
         uctenka.append("============================\n");
 
-
         return uctenka.toString();
     }
 }
-
