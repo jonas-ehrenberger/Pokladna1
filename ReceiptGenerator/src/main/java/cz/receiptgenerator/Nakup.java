@@ -1,25 +1,38 @@
 package cz.receiptgenerator;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Člověk 1: seznam zakoupených produktů a součet. */
+/**
+ * Třída uchovává seznam zakoupených produktů a počítá celkovou cenu nákupu.
+ */
 public class Nakup {
     private final List<Produkt> produkty = new ArrayList<>();
 
-    public void pridejProdukt(Produkt produkt) {
-        // TODO (člověk 1): ověřte nenulový produkt a přidejte do seznamu.
-        throw new UnsupportedOperationException("TODO: Nakup.pridejProdukt");
+    public void pridatProdukt(Produkt produkt) {
+        if (produkt == null) {
+            throw new IllegalArgumentException("Vkládaný produkt nesmí být null.");
+        }
+        produkty.add(produkt);
     }
 
     public List<Produkt> getProdukty() {
         return Collections.unmodifiableList(produkty);
     }
 
-    public BigDecimal vypocitejCelkem() {
-        // TODO (člověk 1): sečtěte ceny položek; prázdný nákup = 0.
-        throw new UnsupportedOperationException("TODO: Nakup.vypocitejCelkem");
+    /**
+     * Spočítá celkovou sumu za všechny položky v nákupu.
+     */
+    public double getCelkovaCena() {
+        double celkem = 0.0;
+        for (Produkt produkt : produkty) {
+            celkem += produkt.getCelkovaCenaPolozky();
+        }
+        return celkem;
+    }
+
+    public boolean jePrazdny() {
+        return produkty.isEmpty();
     }
 }
