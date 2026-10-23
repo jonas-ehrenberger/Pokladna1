@@ -15,21 +15,25 @@ public class Main {
         // Vytvoření konzole a načtení nákupu
         Konzole konzole = new Konzole();
 
-        Nakup nakup;
-
         try (Scanner scanner = new Scanner(System.in)) {
-            nakup = konzole.nactiNakup(scanner);
+
+            Nakup nakup = konzole.nactiNakup(scanner);
+
+            // Vytvoření účtenky
+            TiskUctenky tiskUctenky = new TiskUctenky();
+
+            String uctenka = tiskUctenky.vytvorUctenku(
+                    obchod, nakup
+            );
+
+            // Výpis účtenky
+            System.out.println();
+            System.out.println(uctenka);
+
+            // Čekání před ukončením aplikace
+            System.out.println();
+            System.out.print("Stiskněte Enter pro ukončení...");
+            scanner.nextLine();
         }
-
-        // Vytvoření účtenky
-        TiskUctenky tiskUctenky = new TiskUctenky();
-
-        String uctenka = tiskUctenky.vytvorUctenku(
-                obchod, nakup
-        );
-
-        // Výpis účtenky
-        System.out.println();
-        System.out.println(uctenka);
     }
 }
